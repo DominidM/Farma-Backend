@@ -36,6 +36,14 @@ public class EmpleadosService {
                 .stream().map(this::toDTO).toList();
     }
 
+    // MÉTODO AGREGADO: Buscar empleado por usuario (correo)
+    @Transactional(readOnly = true)
+    public EmpleadosDTO findByUsuario(String usuario) {
+        return empleadosRepository.findByUsuario(usuario)
+                .map(this::toDTO)
+                .orElse(null);
+    }
+
     @Transactional(readOnly = true)
     public long countEmpleados() {
         return empleadosRepository.count();
